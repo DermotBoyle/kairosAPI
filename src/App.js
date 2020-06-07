@@ -1,20 +1,29 @@
 import React from "react";
-import "./App.scss";
 import { ApolloProvider } from "@apollo/react-hooks";
 import client from "./client";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Characters from "./Characters";
+import IndividualCharacter from "./IndividualCharater";
+
+import Main from "./Main";
+
+import Header from "./components/Header";
 
 function App() {
 	return (
-		<ApolloProvider client={client}>
-			<div className="App">
-				<header className="app-header">
-					<h1 className="title">Rick and Morty </h1>
-				</header>
-				<Characters />
-			</div>
-		</ApolloProvider>
+		<Router>
+			<Header />
+			<ApolloProvider client={client}>
+				<Switch>
+					<Route exact path="/" component={Main}></Route>
+					<Route
+						exact
+						path="/IndividualCharacter/:step"
+						render={(props) => <IndividualCharacter {...props} />}
+					/>
+				</Switch>
+			</ApolloProvider>
+		</Router>
 	);
 }
 

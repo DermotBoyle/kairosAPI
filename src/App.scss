@@ -1,13 +1,15 @@
 .App {
-	.app-header {
-		background-image: url("./images/rickcover.jpg");
-		background-size: 100% 100%;
+	background-color: #262c3a;
 
-		width: 100%;
-		.title {
-			text-align: center;
-			padding: 24px;
-			color: white;
+	.footer {
+		height: 80px;
+		border-top: solid red 2px;
+		width: 90%;
+		margin: auto;
+		font-size: 20px;
+		text-align: center;
+		i {
+			color: red;
 		}
 	}
 }

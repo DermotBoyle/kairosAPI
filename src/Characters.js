@@ -2,9 +2,9 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import BottomScrollListener from "react-bottom-scroll-listener";
 import { gql } from "apollo-boost";
+import { useHistory } from "react-router-dom";
 
 import "./Characters.scss";
-import { Button } from "reactstrap";
 
 const GET_CHARACTERS = gql`
 	query fetchCharacters($page: Int!) {
@@ -12,6 +12,7 @@ const GET_CHARACTERS = gql`
 			results {
 				name
 				species
+				id
 				gender
 				image
 				origin {
@@ -23,7 +24,9 @@ const GET_CHARACTERS = gql`
 	}
 `;
 
-function Characters() {
+const Characters = () => {
+	const history = useHistory();
+
 	const { loading, error, data, fetchMore } = useQuery(GET_CHARACTERS, {
 		variables: { page: 1 },
 	});
@@ -52,13 +55,18 @@ function Characters() {
 			},
 		});
 
-	console.log(Characters);
+	const handleNewQuery = (id) => {
+		history.push("/IndividualCharacter/" + id);
+	};
 
 	return (
 		<BottomScrollListener onBottom={scrollEnd}>
 			<div id="page-container">
 				{Characters.map((character, i) => (
-					<div className="character-container" key={i}>
+					<div
+						className="character-container"
+						key={i}
+						onClick={() => handleNewQuery(character.id)}>
 						<div className="image-container">
 							<img
 								src={character.image}
@@ -68,32 +76,12 @@ function Characters() {
 						</div>
 						<div className="character-info">
 							<h3 className="name">{character.name}</h3>
-							<h5 className="detail">
-								Species : <span>{character.species}</span>{" "}
-							</h5>
-							<h5 className="detail">
-								Gender : <span>{character.gender}</span>
-							</h5>
-							<h5 className="detail">
-								Dimension : <span>{character.origin.dimension}</span>
-							</h5>
-							<h5 className="detail">
-								Status :{" "}
-								<span
-									className={
-										character.status !== "Alive"
-											? "status-negative"
-											: "status-positive"
-									}>
-									{character.status}
-								</span>
-							</h5>
 						</div>
 					</div>
 				))}
 			</div>
 		</BottomScrollListener>
 	);
-}
+};
 
 export default Characters;
