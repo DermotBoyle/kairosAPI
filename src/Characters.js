@@ -11,14 +11,8 @@ const GET_CHARACTERS = gql`
 		characters(page: $page) {
 			results {
 				name
-				species
 				id
-				gender
 				image
-				origin {
-					dimension
-				}
-				status
 			}
 		}
 	}
