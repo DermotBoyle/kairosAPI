@@ -35,7 +35,7 @@ const IndividualCharacter = ({
 	if (error) return <p>error :(</p>;
 
 	let { name, image, gender, species, status, episode } = data.character;
-	console.log(data.character.episode);
+
 	return (
 		<div className="character-bio">
 			<h1 className="title">{name}</h1>

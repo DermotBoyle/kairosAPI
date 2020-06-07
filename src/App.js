@@ -8,6 +8,7 @@ import IndividualCharacter from "./IndividualCharater";
 import Main from "./Main";
 
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
 	return (
@@ -23,6 +24,7 @@ function App() {
 					/>
 				</Switch>
 			</ApolloProvider>
+			<Footer />
 		</Router>
 	);
 }
